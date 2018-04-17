@@ -59,6 +59,43 @@
 
 <script>
 
+  let keys = document.getElementsByClassName('key');
+  let drumkit = document.getElementsByTagName('audio');
+  for(let key of keys) {
+    key.addEventListener('click', (event) => {
+      let dataKey = parseInt(event.target.parentNode.attributes[0].nodeValue);
+      if(dataKey) {
+        playDrumkit(dataKey, key, event);
+      }
+    })
+  }
+
+  function playDrumkit(dataKey, key, event) {
+    key.classList.add('playing');
+    for(let sound of drumkit) {
+      let soundDataKey = sound.attributes[0].nodeValue;
+        if(soundDataKey == dataKey) {
+          sound.currentTime = 0;
+          sound.play();
+        }
+    }
+  }
+
+  document.addEventListener('keydown', function(event) {
+    for(let key of keys) {
+      let dataKey = parseInt(key.attributes[0].nodeValue);
+      if(event.keyCode == dataKey) {
+        playDrumkit(dataKey, key, event);
+      }
+    }
+  })
+
+  for (let key of keys) {
+    key.addEventListener('transitionend', function(event) {
+      key.classList.remove('playing');
+    });
+  }
+
 </script>
 
 
