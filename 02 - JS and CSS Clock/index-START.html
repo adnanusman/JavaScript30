@@ -62,12 +62,57 @@
       background:black;
       position: absolute;
       top:50%;
+      transform: rotate(90deg);
+      transform-origin: 100%;
+      transform: 0.05s;
+      transition-timing-function: cubic-bezier(0.23, 1, 0.320, 1);
     }
 
   </style>
 
   <script>
+  // The hour hand should change according the hour
 
+  // The minute hand should change according to the minute hand
+
+  // The second hand should change according to the second
+  let secondHand = document.querySelector('.second-hand');
+  let minuteHand = document.querySelector('.min-hand');
+  let hourHand = document.querySelector('.hour-hand');  
+  // let secondCounter = 90;
+  // let minuteCounter = 90;
+  // let hourCounter = 90;
+
+  // setInterval(function() {
+  //   secondCounter += 6;
+  //   secondHand.style.transform = 'rotate(' + secondCounter + 'deg)';
+  // }, 1000)
+
+  // setInterval(function() {
+  //   minuteCounter += 6;
+  //   minuteHand.style.transform = 'rotate(' + minuteCounter + 'deg)';
+  // }, 60000)
+  
+  // setInterval(function() {
+  //   hourCounter += 30;
+  //   hourHand.style.transform = 'rotate(' + hourCounter + 'deg)';
+  // }, 3600000)
+
+  function newTime() {
+    const now = new Date();
+    const second = now.getSeconds();
+    const minute = now.getMinutes();
+    const hour = now.getHours();
+
+    let secondDeg = (second / 60 * 360) + 90;
+    let minuteDeg = (minute / 60 * 360) + 90;
+    let hourDeg = (hour / 12 * 360) + 90;
+    secondHand.style.transform = 'rotate(' + secondDeg + 'deg)';
+    minuteHand.style.transform = 'rotate(' + minuteDeg + 'deg)';
+    hourHand.style.transform = 'rotate(' + hourDeg + 'deg)';
+  }
+
+  setInterval(newTime, 1000);
 
   </script>
 </body>
