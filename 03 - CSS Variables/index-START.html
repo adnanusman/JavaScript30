@@ -34,6 +34,10 @@
       filter: blur(var(--blur));
     }
 
+    .hl {
+      color: var(--base);
+    }
+
     /*
       misc styles, nothing to do with CSS variables
     */
@@ -62,6 +66,7 @@
     let newBlurValue;
     let newBGValue;
     let img = document.querySelector('img');
+    let hl = document.querySelector('.hl');
 
     let inputs = document.getElementsByTagName('input');
 
@@ -69,21 +74,22 @@
     inputs[0].addEventListener('change', (event) => {
       console.log(event.target.valueAsNumber);
       newSpacingValue = event.target.valueAsNumber;
-      img.style.padding = `${newSpacingValue}px`;      
+      img.style.setProperty('--spacing', `${newSpacingValue}px`);  
     });
 
     // Blur Input
     inputs[1].addEventListener('change', (event) => {
       console.log(event.target.valueAsNumber);
       newBlurValue = event.target.valueAsNumber;
-      img.style.filter = `blur(${newBlurValue}px)`;
+      img.style.setProperty('--blur', `${newBlurValue}px`);
     });
 
     // Background Input
     inputs[2].addEventListener('change', (event) => {
       console.log(event.target.value);
       newBGValue = event.target.value;
-      img.style.background = newBGValue;
+      img.style.setProperty('--base', newBGValue);
+      hl.style.setProperty('--base', newBGValue);
     });
 
   </script>
