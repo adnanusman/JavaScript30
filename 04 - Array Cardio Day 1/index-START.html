@@ -31,29 +31,96 @@
 
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    const filteredInventors = inventors.filter( (inventor) => {
+      if(inventor.year < 1600 && inventor.year >= 1500) {
+        return inventor;
+      };
+    });
+
+    console.table(filteredInventors);
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors' first and last names
 
+    const firstLast = inventors.map( (inventor) => {
+      return {first: inventor.first, last: inventor.last};
+    })
+
+    console.table(firstLast);
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    const sortedArray = inventors.sort(compareYears);
+    
+    function compareYears(a, b) {
+      return a.year - b.year;
+    }
+
+    console.table(sortedArray);
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live?
+    const reducedArray = [];
+    
+    inventors.reduce((accumulator, currentValue) => {
+      let age = currentValue.passed - currentValue.year;
+      currentValue.age = age;
+      reducedArray.push(currentValue);
+    }, {});
+
+    console.log('Test 4 and 5, Reduced Array:', reducedArray);
 
     // 5. Sort the inventors by years lived
+    reducedArray.sort(compareAge);
+    
+    function compareAge(a, b) {
+      return a.age - b.age;
+    };
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-
+      //solved in console.
+      // var nodeList = document.querySelectorAll('a');
+      
+      // nodeList.forEach(function(item) {
+      //   if(item.attributes.title === undefined) return;
+      //   if(item.attributes.title.value.search('Boulevard de') !== -1) {
+      //       console.log(item.attributes.title.value);
+      //   };
+      // });
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    people.sort(compareNames);
+    
+    function compareNames(a, b) {
+      if (a < b) {
+        return - 1;
+      } 
+
+      if (a > b) {
+        return 1;
+      }
+    }
+
+    console.log('Test 7, Sorted to last name:', people);
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
 
+    let dataSum = data.reduce((accu, currValue) => {
+
+      if(!accu[currValue]) {
+        accu[currValue] = 1;
+      } else {
+        accu[currValue] += 1;
+      }
+      
+      return accu;
+    }, {})
+
+    console.log('Test 8 sum of instances in array', dataSum);
+    
   </script>
 </body>
 </html>
