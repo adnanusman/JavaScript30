@@ -67,14 +67,18 @@
       reducedArray.push(currentValue);
     }, {});
 
-    console.log('Test 4 and 5, Reduced Array:', reducedArray);
+    console.log('Test 4, Reduced Array:', reducedArray);
 
     // 5. Sort the inventors by years lived
-    reducedArray.sort(compareAge);
+    const sortedByAge = reducedArray.map( (items) => items);
+
+    sortedByAge.sort(compareAge);
     
     function compareAge(a, b) {
       return a.age - b.age;
     };
+
+    console.log('Test 5, Sorted Array:', sortedByAge);
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
@@ -108,15 +112,15 @@
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
 
-    let dataSum = data.reduce((accu, currValue) => {
+    let dataSum = data.reduce((obj, currValue) => {
 
-      if(!accu[currValue]) {
-        accu[currValue] = 1;
+      if(!obj[currValue]) {
+        obj[currValue] = 1;
       } else {
-        accu[currValue] += 1;
+        obj[currValue] += 1;
       }
       
-      return accu;
+      return obj;
     }, {})
 
     console.log('Test 8 sum of instances in array', dataSum);
